@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}  
+    {% if item !=[] %}
+        <div>
+            {% if 'email' in session and session['email'] == item.user_email %}<div style="float:right; padding-right: 10px;"><a href="{{url_for('delete_item', category_id = item.category_id, item_id = item.id)}}">Delete</a></div>{% endif %}
+            <h1>{{ item.title }} ${{ item.price }} </h1>
+            <p>{{ item.description }}</p>
+            <p>Posted: {{ item.date_posted.strftime('%m/%d/%Y %H:%M') }}</p>
+            <p>
+                {% if 'email' in session and session['email'] == item.user_email %}<input type="button" onclick="window.location.href='{{url_for('edit_item', category_id = item.category_id, item_id = item.id)}}';" value="Edit Item">{% endif %}
+                <input type="button" onclick="window.location.href='{{url_for('display_category', category_id = item.category_id)}}';" value="Cancel">
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

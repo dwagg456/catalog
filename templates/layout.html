@@ -1,0 +1,21 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}"> 
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div id="header">
+        <ul>
+            <li><b>Local Resale Community</b></li>
+            <li style="float:right; padding-right:100px">
+                {% if 'email' not in session %}
+                    <button id="login_button" type="button" onclick="window.location.href='{{url_for('login')}}';">Login</button>
+                {% else %}
+                    <button id="logout_button" type="button" onclick="window.location.href='{{url_for('gdisconnect')}}';">Logout</button>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+</body>
+</html>
